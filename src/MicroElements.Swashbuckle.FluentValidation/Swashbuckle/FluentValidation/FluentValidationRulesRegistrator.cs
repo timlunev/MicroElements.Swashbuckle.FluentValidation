@@ -1,4 +1,7 @@
-﻿using MicroElements.Swashbuckle.FluentValidation;
+﻿// Copyright (c) MicroElements. All rights reserved.
+// Licensed under the MIT license. See LICENSE file in the project root for full license information.
+
+using MicroElements.Swashbuckle.FluentValidation;
 using Microsoft.Extensions.DependencyInjection;
 using Swashbuckle.AspNetCore.SwaggerGen;
 

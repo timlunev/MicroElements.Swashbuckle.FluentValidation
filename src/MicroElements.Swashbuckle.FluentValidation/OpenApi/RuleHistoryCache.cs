@@ -1,11 +1,14 @@
-﻿using System;
+﻿// Copyright (c) MicroElements. All rights reserved.
+// Licensed under the MIT license. See LICENSE file in the project root for full license information.
+
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Runtime.CompilerServices;
 using FluentValidation.Validators;
 using Microsoft.OpenApi.Models;
 
-namespace MicroElements.Swashbuckle.FluentValidation
+namespace MicroElements.OpenApi
 {
     internal static class RuleHistoryCache
     {
@@ -130,23 +133,6 @@ namespace MicroElements.Swashbuckle.FluentValidation
         public int GetHashCode(IPropertyValidator? obj)
         {
             return obj?.GetHashCode() ?? 0;
-        }
-    }
-
-    internal class PropertyValidatorComparer2 : IEqualityComparer<IPropertyValidator>
-    {
-        public bool Equals(IPropertyValidator x, IPropertyValidator y)
-        {
-            if (ReferenceEquals(x, y)) return true;
-            if (ReferenceEquals(x, null)) return false;
-            if (ReferenceEquals(y, null)) return false;
-            if (x.GetType() != y.GetType()) return false;
-            return Equals(x.Options, y.Options);
-        }
-
-        public int GetHashCode(IPropertyValidator obj)
-        {
-            return obj.Options != null ? obj.Options.GetHashCode() : 0;
         }
     }
 }

@@ -6,7 +6,7 @@ using FluentValidation.Validators;
 using Microsoft.OpenApi.Models;
 using Swashbuckle.AspNetCore.SwaggerGen;
 
-namespace MicroElements.Swashbuckle.FluentValidation
+namespace MicroElements.OpenApi
 {
     /// <summary>
     /// RuleContext.

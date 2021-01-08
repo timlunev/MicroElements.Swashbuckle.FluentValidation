@@ -1,15 +1,13 @@
 ﻿using System.Linq;
 using FluentValidation;
 using FluentValidation.AspNetCore;
-using MicroElements.Swashbuckle.FluentValidation;
+using MicroElements.FluentValidation.AspNetCore;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using Microsoft.OpenApi.Models;
-using Newtonsoft.Json.Serialization;
-using Newtonsoft.Json.Utilities;
 using SampleWebApi.DbModels;
 using Swashbuckle.AspNetCore.Swagger;
 

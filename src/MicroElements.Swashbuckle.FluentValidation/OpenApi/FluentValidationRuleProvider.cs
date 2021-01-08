@@ -4,9 +4,10 @@
 using System.Collections.Generic;
 using System.Linq;
 using FluentValidation.Validators;
+using MicroElements.FluentValidation;
 using Microsoft.OpenApi.Models;
 
-namespace MicroElements.Swashbuckle.FluentValidation
+namespace MicroElements.OpenApi
 {
     /// <summary>
     /// Provider for <see cref="FluentValidationRule"/>.
@@ -172,6 +173,30 @@ namespace MicroElements.Swashbuckle.FluentValidation
                 },
 
             };
+        }
+
+        /// <summary>
+        /// Overrides source rules with <paramref name="overrides"/> by name.
+        /// </summary>
+        /// <param name="source">Source rules.</param>
+        /// <param name="overrides">Overrides list.</param>
+        /// <returns>New rule list.</returns>
+        public static IReadOnlyList<FluentValidationRule> OverrideRules(
+            this IReadOnlyList<FluentValidationRule> source,
+            IEnumerable<FluentValidationRule>? overrides)
+        {
+            if (overrides != null)
+            {
+                var validationRules = source.ToDictionary(rule => rule.Name, rule => rule);
+                foreach (var validationRule in overrides)
+                {
+                    validationRules[validationRule.Name] = validationRule;
+                }
+
+                return validationRules.Values.ToList();
+            }
+
+            return source;
         }
     }
 }

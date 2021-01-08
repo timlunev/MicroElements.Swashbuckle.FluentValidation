@@ -1,4 +1,5 @@
 using FluentAssertions;
+using MicroElements.OpenApi;
 using Xunit;
 
 namespace MicroElements.Swashbuckle.FluentValidation.Tests

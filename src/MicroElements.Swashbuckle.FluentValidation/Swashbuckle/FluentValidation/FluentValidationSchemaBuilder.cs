@@ -7,6 +7,8 @@ using System.Linq;
 using FluentValidation;
 using FluentValidation.Internal;
 using FluentValidation.Validators;
+using MicroElements.FluentValidation;
+using MicroElements.OpenApi;
 using Microsoft.Extensions.Logging;
 using Microsoft.OpenApi.Models;
 using Swashbuckle.AspNetCore.SwaggerGen;

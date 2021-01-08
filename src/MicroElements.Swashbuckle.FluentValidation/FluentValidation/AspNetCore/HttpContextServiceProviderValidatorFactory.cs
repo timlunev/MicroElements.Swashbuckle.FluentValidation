@@ -1,8 +1,11 @@
-﻿using System;
+﻿// Copyright (c) MicroElements. All rights reserved.
+// Licensed under the MIT license. See LICENSE file in the project root for full license information.
+
+using System;
 using FluentValidation;
 using Microsoft.AspNetCore.Http;
 
-namespace MicroElements.Swashbuckle.FluentValidation
+namespace MicroElements.FluentValidation.AspNetCore
 {
     /// <summary>
     /// Allows for the creation of validators that have dependencies on scoped services.
