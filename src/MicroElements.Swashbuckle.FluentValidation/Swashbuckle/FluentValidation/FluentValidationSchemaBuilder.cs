@@ -58,7 +58,11 @@ namespace MicroElements.Swashbuckle.FluentValidation
                                     {
                                         lazyLog.LogOnce();
 
-                                        rule.Apply(new RuleContext(schema, schemaPropertyName, propertyValidator, schemaFilterContext, isCollectionValidator: ruleContext.IsCollectionRule));
+                                        rule.Apply(new RuleContext(
+                                            schema,
+                                            schemaPropertyName,
+                                            propertyValidator,
+                                            isCollectionValidator: ruleContext.IsCollectionRule));
 
                                         logger.LogDebug($"Rule '{rule.Name}' applied for property '{schemaTypeName}.{schemaPropertyName}'.");
                                         schema.AddRuleHistoryItem(ruleHistoryItem);
