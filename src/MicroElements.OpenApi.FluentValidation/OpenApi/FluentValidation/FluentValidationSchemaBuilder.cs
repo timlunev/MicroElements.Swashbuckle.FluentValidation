@@ -8,26 +8,76 @@ using FluentValidation;
 using FluentValidation.Internal;
 using FluentValidation.Validators;
 using MicroElements.FluentValidation;
-using MicroElements.OpenApi;
 using Microsoft.Extensions.Logging;
 using Microsoft.OpenApi.Models;
-using Swashbuckle.AspNetCore.SwaggerGen;
 
-namespace MicroElements.Swashbuckle.FluentValidation
+namespace MicroElements.OpenApi.FluentValidation
 {
     /// <summary>
     /// OpenApi schema builder.
     /// </summary>
     public static class FluentValidationSchemaBuilder
     {
+        public static void ApplyRulesToSchema(
+            OpenApiSchema schema,
+            Type schemaType,
+            IValidatorFactory? validatorFactory,
+            IReadOnlyCollection<FluentValidationRule> rules,
+            ILogger logger)
+        {
+            if (validatorFactory == null)
+            {
+                logger.LogWarning(0, "ValidatorFactory is not provided. Please register FluentValidation.");
+                return;
+            }
+
+            if (schema == null)
+                return;
+
+            IValidator? validator = null;
+
+            try
+            {
+                validator = validatorFactory.GetValidator(schemaType);
+            }
+            catch (Exception e)
+            {
+                logger.LogWarning(0, e, $"GetValidator for type '{schemaType}' fails.");
+            }
+
+            if (validator == null)
+                return;
+
+            ApplyRulesToSchema(
+                schema: schema,
+                schemaType: schemaType,
+                schemaPropertyNames: null,
+                validator: validator,
+                rules: rules,
+                logger: logger);
+
+            try
+            {
+                AddRulesFromIncludedValidators(
+                    schema: schema,
+                    schemaType: schemaType,
+                    validator: validator,
+                    rules: rules,
+                    logger: logger);
+            }
+            catch (Exception e)
+            {
+                logger.LogWarning(0, e, $"Applying IncludeRules for type '{schemaType}' fails.");
+            }
+        }
+
         /// <summary>
         /// Applies rules from validator.
         /// </summary>
-        internal static void ApplyRulesToSchema(
+        public static void ApplyRulesToSchema(
             OpenApiSchema schema,
             Type schemaType,
             IEnumerable<string>? schemaPropertyNames,
-            SchemaFilterContext? schemaFilterContext,
             IValidator validator,
             IReadOnlyCollection<FluentValidationRule> rules,
             ILogger logger)
@@ -83,9 +133,9 @@ namespace MicroElements.Swashbuckle.FluentValidation
             }
         }
 
-        internal static void AddRulesFromIncludedValidators(
+        public static void AddRulesFromIncludedValidators(
             OpenApiSchema schema,
-            SchemaFilterContext schemaFilterContext,
+            Type schemaType,
             IValidator validator,
             IReadOnlyCollection<FluentValidationRule> rules,
             ILogger logger)
@@ -116,16 +166,15 @@ namespace MicroElements.Swashbuckle.FluentValidation
                 {
                     ApplyRulesToSchema(
                         schema: schema,
-                        schemaType: schemaFilterContext.Type,
+                        schemaType: schemaType,
                         schemaPropertyNames: null,
-                        schemaFilterContext: schemaFilterContext,
                         validator: includedValidator,
                         rules: rules,
                         logger: logger);
 
                     AddRulesFromIncludedValidators(
                         schema: schema,
-                        schemaFilterContext: schemaFilterContext,
+                        schemaType: schemaType,
                         validator: includedValidator,
                         rules: rules,
                         logger: logger);
@@ -133,7 +182,7 @@ namespace MicroElements.Swashbuckle.FluentValidation
             }
         }
 
-        internal static IValidator? GetValidatorFromChildValidatorAdapter(this IChildValidatorAdaptor childValidatorAdapter)
+        public static IValidator? GetValidatorFromChildValidatorAdapter(this IChildValidatorAdaptor childValidatorAdapter)
         {
             // Fake context. We have not got real context because no validation yet.
             var fakeContext = new PropertyValidatorContext(new ValidationContext<object>(null), null, string.Empty);

@@ -4,7 +4,7 @@
 using System;
 using System.Collections.Generic;
 using FluentValidation;
-using MicroElements.OpenApi;
+using MicroElements.OpenApi.FluentValidation;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Logging.Abstractions;
 using Microsoft.OpenApi.Models;
@@ -40,58 +40,12 @@ namespace MicroElements.Swashbuckle.FluentValidation
         /// <inheritdoc />
         public void Apply(OpenApiSchema schema, SchemaFilterContext context)
         {
-            if (_validatorFactory == null)
-            {
-                _logger.LogWarning(0, "ValidatorFactory is not provided. Please register FluentValidation.");
-                return;
-            }
+            Type schemaType = context.Type;
 
-            if (schema == null)
-                return;
-
-            IValidator? validator = null;
-            try
-            {
-                validator = _validatorFactory.GetValidator(context.Type);
-            }
-            catch (Exception e)
-            {
-                _logger.LogWarning(0, e, $"GetValidator for type '{context.Type}' fails.");
-            }
-
-            if (validator == null)
-                return;
-
-            ApplyRulesToSchema(schema, context, validator);
-
-            try
-            {
-                AddRulesFromIncludedValidators(schema, context, validator);
-            }
-            catch (Exception e)
-            {
-                _logger.LogWarning(0, e, $"Applying IncludeRules for type '{context.Type}' fails.");
-            }
-        }
-
-        private void ApplyRulesToSchema(OpenApiSchema schema, SchemaFilterContext context, IValidator validator)
-        {
             FluentValidationSchemaBuilder.ApplyRulesToSchema(
                 schema: schema,
-                schemaType: context.Type,
-                schemaPropertyNames: null,
-                schemaFilterContext: context,
-                validator: validator,
-                rules: _rules,
-                logger: _logger);
-        }
-
-        private void AddRulesFromIncludedValidators(OpenApiSchema schema, SchemaFilterContext context, IValidator validator)
-        {
-            FluentValidationSchemaBuilder.AddRulesFromIncludedValidators(
-                schema: schema,
-                schemaFilterContext: context,
-                validator: validator,
+                schemaType: schemaType,
+                validatorFactory: _validatorFactory,
                 rules: _rules,
                 logger: _logger);
         }

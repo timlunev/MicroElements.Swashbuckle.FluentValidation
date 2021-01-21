@@ -2,9 +2,10 @@
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
 
 using FluentValidation.Validators;
-using Microsoft.OpenApi.Models;
+using NJsonSchema;
+using NJsonSchema.Generation;
 
-namespace MicroElements.OpenApi
+namespace MicroElements.OpenApi.FluentValidation
 {
     /// <summary>
     /// RuleContext.
@@ -12,9 +13,9 @@ namespace MicroElements.OpenApi
     public class RuleContext
     {
         /// <summary>
-        /// Swagger schema.
+        /// SchemaProcessorContext.
         /// </summary>
-        public OpenApiSchema Schema { get; }
+        public JsonSchema Schema { get; }
 
         /// <summary>
         /// Property name.
@@ -34,7 +35,7 @@ namespace MicroElements.OpenApi
         /// <summary>
         /// Gets target property schema.
         /// </summary>
-        public OpenApiSchema Property => !IsCollectionValidator ? Schema.Properties[PropertyKey] : Schema.Properties[PropertyKey].Items;
+        //public JsonSchemaProperty Property => !IsCollectionValidator ? Schema.Schema.Properties[PropertyKey] : Schema.Schema.Properties[PropertyKey].Items;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="RuleContext"/> class.
@@ -42,10 +43,9 @@ namespace MicroElements.OpenApi
         /// <param name="schema">Swagger schema.</param>
         /// <param name="propertyKey">Property name.</param>
         /// <param name="propertyValidator">Property validator.</param>
-        /// <param name="schemaFilterContext">SchemaFilterContext.</param>
         /// <param name="isCollectionValidator">Should be applied to collection items.</param>
         public RuleContext(
-            OpenApiSchema schema,
+            JsonSchema schema,
             string propertyKey,
             IPropertyValidator propertyValidator,
             bool isCollectionValidator = false)

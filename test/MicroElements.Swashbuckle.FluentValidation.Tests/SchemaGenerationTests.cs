@@ -2,6 +2,7 @@ using System.Collections.Generic;
 using FluentAssertions;
 using FluentValidation;
 using MicroElements.OpenApi;
+using MicroElements.OpenApi.FluentValidation;
 using Microsoft.OpenApi.Models;
 using SampleWebApi.Contracts;
 using SampleWebApi.Validators;

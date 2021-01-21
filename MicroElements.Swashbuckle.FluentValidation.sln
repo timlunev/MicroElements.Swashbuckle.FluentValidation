@@ -22,6 +22,10 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MicroElements.Swashbuckle.FluentValidation.Tests", "test\MicroElements.Swashbuckle.FluentValidation.Tests\MicroElements.Swashbuckle.FluentValidation.Tests.csproj", "{AAA88B0E-AA41-402F-B41B-AE95DBBD746C}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MicroElements.OpenApi.FluentValidation", "src\MicroElements.OpenApi.FluentValidation\MicroElements.OpenApi.FluentValidation.csproj", "{07252125-00CF-4D9C-B95A-90346F234605}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MicroElements.NSwag.FluentValidation", "src\MicroElements.NSwag.FluentValidation\MicroElements.NSwag.FluentValidation.csproj", "{50A2937A-BAB8-4D11-AF9E-F00A5E0B3C29}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -40,6 +44,14 @@ Global
 		{AAA88B0E-AA41-402F-B41B-AE95DBBD746C}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{AAA88B0E-AA41-402F-B41B-AE95DBBD746C}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{AAA88B0E-AA41-402F-B41B-AE95DBBD746C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{07252125-00CF-4D9C-B95A-90346F234605}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{07252125-00CF-4D9C-B95A-90346F234605}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{07252125-00CF-4D9C-B95A-90346F234605}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{07252125-00CF-4D9C-B95A-90346F234605}.Release|Any CPU.Build.0 = Release|Any CPU
+		{50A2937A-BAB8-4D11-AF9E-F00A5E0B3C29}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{50A2937A-BAB8-4D11-AF9E-F00A5E0B3C29}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{50A2937A-BAB8-4D11-AF9E-F00A5E0B3C29}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{50A2937A-BAB8-4D11-AF9E-F00A5E0B3C29}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

@@ -7,7 +7,7 @@ using FluentValidation.Validators;
 using MicroElements.FluentValidation;
 using Microsoft.OpenApi.Models;
 
-namespace MicroElements.OpenApi
+namespace MicroElements.OpenApi.FluentValidation
 {
     /// <summary>
     /// Provider for <see cref="FluentValidationRule"/>.
@@ -74,6 +74,7 @@ namespace MicroElements.OpenApi
                             {
                                 if (schemaProperty.AllOf.Count(schema => schema.Pattern != null) == 0)
                                 {
+                                    new MsOpenApiSchema()
                                     // Add first pattern as AllOf
                                     schemaProperty.AllOf.Add(new OpenApiSchema()
                                     {
@@ -193,6 +194,7 @@ namespace MicroElements.OpenApi
                     validationRules[validationRule.Name] = validationRule;
                 }
 
+                // TODO: preserve order!
                 return validationRules.Values.ToList();
             }
 

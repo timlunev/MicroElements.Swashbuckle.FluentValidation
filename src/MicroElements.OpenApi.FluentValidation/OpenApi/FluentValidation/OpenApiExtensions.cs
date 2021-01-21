@@ -6,14 +6,14 @@ using System.Linq.Expressions;
 using System.Reflection;
 using Microsoft.OpenApi.Models;
 
-namespace MicroElements.OpenApi
+namespace MicroElements.OpenApi.FluentValidation
 {
     public static class OpenApiExtensions
     {
         /// <summary>
         /// Sets Nullable to false if MinLength > 0.
         /// </summary>
-        internal static void SetNotNullableIfMinLengthGreaterThenZero(this OpenApiSchema schemaProperty)
+        internal static void SetNotNullableIfMinLengthGreaterThenZero(this IOpenApiSchema schemaProperty)
         {
             if (schemaProperty.MinLength.HasValue && schemaProperty.MinLength > 0)
             {
@@ -21,7 +21,7 @@ namespace MicroElements.OpenApi
             }
         }
 
-        internal static void SetNewMax(this OpenApiSchema schemaProperty, Expression<Func<OpenApiSchema, int?>> prop, int? newValue)
+        internal static void SetNewMax(this IOpenApiSchema schemaProperty, Expression<Func<IOpenApiSchema, int?>> prop, int? newValue)
         {
             if (newValue.HasValue)
             {
@@ -31,7 +31,7 @@ namespace MicroElements.OpenApi
             }
         }
 
-        internal static void SetNewMax(this OpenApiSchema schemaProperty, Expression<Func<OpenApiSchema, decimal?>> prop, decimal? newValue)
+        internal static void SetNewMax(this IOpenApiSchema schemaProperty, Expression<Func<IOpenApiSchema, decimal?>> prop, decimal? newValue)
         {
             if (newValue.HasValue)
             {
@@ -41,7 +41,7 @@ namespace MicroElements.OpenApi
             }
         }
 
-        internal static void SetNewMin(this OpenApiSchema schemaProperty, Expression<Func<OpenApiSchema, int?>> prop, int? newValue)
+        internal static void SetNewMin(this IOpenApiSchema schemaProperty, Expression<Func<IOpenApiSchema, int?>> prop, int? newValue)
         {
             if (newValue.HasValue)
             {
@@ -53,7 +53,7 @@ namespace MicroElements.OpenApi
             schemaProperty.SetNotNullableIfMinLengthGreaterThenZero();
         }
 
-        internal static void SetNewMin(this OpenApiSchema schemaProperty, Expression<Func<OpenApiSchema, decimal?>> prop, decimal? newValue)
+        internal static void SetNewMin(this IOpenApiSchema schemaProperty, Expression<Func<IOpenApiSchema, decimal?>> prop, decimal? newValue)
         {
             if (newValue.HasValue)
             {

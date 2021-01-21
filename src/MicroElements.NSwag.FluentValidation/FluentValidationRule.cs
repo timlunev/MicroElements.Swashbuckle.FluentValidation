@@ -4,7 +4,7 @@
 using System;
 using FluentValidation.Validators;
 
-namespace MicroElements.OpenApi
+namespace MicroElements.OpenApi.FluentValidation
 {
     /// <summary>
     /// FluentValidationRule.

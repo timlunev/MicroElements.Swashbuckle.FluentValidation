@@ -6,6 +6,7 @@ using System.Collections.Generic;
 using System.Linq;
 using FluentValidation;
 using MicroElements.OpenApi;
+using MicroElements.OpenApi.FluentValidation;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Logging.Abstractions;
 using Microsoft.Extensions.Options;
@@ -100,7 +101,6 @@ namespace MicroElements.Swashbuckle.FluentValidation
                             schema: schema,
                             schemaType: parameterType,
                             schemaPropertyNames: new[] { schemaPropertyName },
-                            schemaFilterContext: null,
                             validator: validator,
                             rules: _rules,
                             logger: _logger);

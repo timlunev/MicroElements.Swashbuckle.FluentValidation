@@ -8,7 +8,7 @@ using System.Runtime.CompilerServices;
 using FluentValidation.Validators;
 using Microsoft.OpenApi.Models;
 
-namespace MicroElements.OpenApi
+namespace MicroElements.OpenApi.FluentValidation
 {
     internal static class RuleHistoryCache
     {
